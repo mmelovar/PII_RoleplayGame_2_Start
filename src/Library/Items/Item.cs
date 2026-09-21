@@ -7,21 +7,33 @@
 namespace Library.Items
 {
     /// <summary>
-    /// Representa un elemento o equipamiento del juego.
+    /// Representa un elemento del juego. Por defecto no aporta ataque ni defensa;
+    /// cada subclase sobrescribe los valores que sí aporta.
     /// </summary>
     public abstract class Item
     {
-        public string Name { get; protected set; }
-
-        public int AttackValue { get; protected set; }
-
-        public int DefenseValue { get; protected set; }
-
-        protected Item(string name, int attackValue, int defenseValue)
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="Item"/>.
+        /// </summary>
+        /// <param name="name">El nombre del elemento.</param>
+        protected Item(string name)
         {
             Name = name;
-            AttackValue = attackValue;
-            DefenseValue = defenseValue;
         }
+
+        /// <summary>
+        /// Obtiene el nombre del elemento.
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
+        /// Obtiene el valor de ataque que aporta el elemento.
+        /// </summary>
+        public virtual int AttackValue => 0;
+
+        /// <summary>
+        /// Obtiene el valor de defensa que aporta el elemento.
+        /// </summary>
+        public virtual int DefenseValue => 0;
     }
 }
