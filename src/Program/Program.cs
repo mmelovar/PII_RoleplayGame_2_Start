@@ -1,25 +1,24 @@
-﻿using Ucu.Poo.RoleplayGame;
+﻿//--------------------------------------------------------------------------------
+// <copyright file="Program.cs" company="Universidad Católica del Uruguay">
+//     Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+//--------------------------------------------------------------------------------
 
-SpellsBook book = new SpellsBook();
-book.Spells = new Spell[]{ new Spell() };
+using System;
 
-Wizard gandalf = new Wizard("Gandalf");
-gandalf.Staff = new Staff();
-gandalf.SpellsBook = book;
-
-Dwarf gimli = new Dwarf("Gimli");
-gimli.Axe = new Axe();
-gimli.Helmet = new Helmet();
-gimli.Shield = new Shield();
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.AttackValue}");
-
-gimli.ReceiveAttack(gandalf.AttackValue);
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-
-gimli.Cure();
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-
+namespace Ucu.Poo.RolePlayGame
+{
+    /// <summary>
+    /// Programa principal.
+    /// </summary>
+    public static class Program
+    {
+        /// <summary>
+        /// Punto de entrada al programa principal.
+        /// </summary>
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("¡Hola mundo!");
+        }
+    }
+}
