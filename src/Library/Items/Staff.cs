@@ -7,16 +7,16 @@
 namespace Library.Items
 {
     /// <summary>
-    /// Representa un báculo mágico (Staff) que puede ser utilizado por magos.
+    /// Representa un báculo. Es un elemento mágico que ataca y defiende.
     /// </summary>
-    public class Staff : Item
+    public class Staff : MagicalItem
     {
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="Staff"/>.
         /// </summary>
-        /// <param name="name">El nombre del báculo.</param>
-        /// <param name="attackValue">El valor de ataque del báculo.</param>
-        /// <param name="defenseValue">El valor de defensa del báculo.</param>
+        /// <param name="name">El nombre del elemento.</param>
+        /// <param name="attackValue">El valor de ataque.</param>
+        /// <param name="defenseValue">El valor de defensa.</param>
         public Staff(string name, int attackValue, int defenseValue)
             : base(name, attackValue, defenseValue)
         {

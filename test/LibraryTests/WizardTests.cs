@@ -51,7 +51,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
         [Test]
         public void GetAttackValue_WithStaff_ReturnsBasePlusStaffAttack()
         {
-            this.gandalf.SetItem(this.staff);
+            this.gandalf.AddItem(this.staff);
 
             int expectedAttack = 20 + 40; // Base + Staff
             Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(expectedAttack));
@@ -79,8 +79,8 @@ namespace Ucu.Poo.RolePlayGame.Tests
             this.spellsBook.AddSpell(this.fireball);
             this.spellsBook.AddSpell(this.shieldSpell);
 
-            this.gandalf.SetItem(this.staff);
-            this.gandalf.SetItem(this.spellsBook);
+            this.gandalf.AddItem(this.staff);
+            this.gandalf.AddItem(this.spellsBook);
 
             int expectedAttack = 20 + 40 + 60; // Base (20) + Staff (40) + SpellsBook (60)
             Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(expectedAttack));
@@ -94,8 +94,8 @@ namespace Ucu.Poo.RolePlayGame.Tests
         {
             this.spellsBook.AddSpell(this.shieldSpell);
 
-            this.gandalf.SetItem(this.staff);
-            this.gandalf.SetItem(this.spellsBook);
+            this.gandalf.AddItem(this.staff);
+            this.gandalf.AddItem(this.spellsBook);
 
             int expectedDefense = 10 + 15 + 30; // Base (10) + Staff (15) + SpellsBook (30)
             Assert.That(this.gandalf.GetDefenseValue(), Is.EqualTo(expectedDefense));
@@ -116,28 +116,37 @@ namespace Ucu.Poo.RolePlayGame.Tests
         }
 
         /// <summary>
-        /// Verifica que al desequipar un item con DropItem, el mago deje de tenerlo y su ataque disminuya.
+        /// Verifica que al quitar un item con RemoveItem, el mago deje de tenerlo y su ataque disminuya.
         /// </summary>
         [Test]
-        public void DropItem_EquippedStaff_RemovesStaffAndReducesAttack()
+        public void RemoveItem_EquippedStaff_RemovesStaffAndReducesAttack()
         {
-            this.gandalf.SetItem(this.staff);
-            Assert.That(this.gandalf.Staff, Is.EqualTo(this.staff));
+            this.gandalf.AddItem(this.staff);
+            Assert.That(this.gandalf.Items, Does.Contain(this.staff));
 
-            this.gandalf.DropItem(this.staff);
-            Assert.That(this.gandalf.Staff, Is.Null);
+            this.gandalf.RemoveItem(this.staff);
+            Assert.That(this.gandalf.Items, Does.Not.Contain(this.staff));
             Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(20));
         }
 
         /// <summary>
-        /// Verifica que intentar equipar un item no permitido para el mago lance una excepción.
+        /// Verifica que el mago, además de elementos mágicos, pueda usar elementos comunes.
         /// </summary>
         [Test]
-        public void SetItem_InvalidItem_ThrowsArgumentException()
+        public void AddItem_NonMagicalItem_AddsItsAttack()
         {
-            Sword genericItem = new Sword("Espada", 15, 0);
+            this.gandalf.AddItem(new Sword("Espada", 15));
 
-            Assert.Throws<ArgumentException>(() => this.gandalf.SetItem(genericItem));
+            Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(20 + 15));
+        }
+
+        /// <summary>
+        /// Verifica que agregar un item nulo lance una excepción.
+        /// </summary>
+        [Test]
+        public void AddItem_NullItem_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => this.gandalf.AddItem(null));
         }
     }
 }

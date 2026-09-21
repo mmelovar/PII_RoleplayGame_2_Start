@@ -1,100 +1,85 @@
 ```mermaid
-classDiagram 
+classDiagram
 
     class Character {
+        <<abstract>>
+        -List~Item~ items
         +string Name
         +int Health
         +int MaxHealth
         +int BaseAttack
         +int BaseDefense
-        +Character(string name, int health, int baseAttack, int baseDefense)
+        +IReadOnlyList~Item~ Items
+        #bool CanUseMagicalItems
+        #Character(string name, int health, int baseAttack, int baseDefense)
+        +void AddItem(Item item)
+        +void RemoveItem(Item item)
+        +int GetAttackValue()
+        +int GetDefenseValue()
         +void ReceiveAttack(int power)
         +void Cure(int points)
         +void Attack(Character target)
-        +int GetAttackValue()
-        +int GetDefenseValue()
     }
 
-    class Item {}
-
     class Dwarf {
-        +Axe Axe
-        +Shield Shield
-        +Bow Bow
-        +Helmet Helmet
-        +void EquipAxe(Axe axe)
-        +void EquipShield(Shield shield)
-        +void EquipBow(Bow bow)
-        +void EquipHelmet(Helmet helmet)
-        +void UnequipAxe()
-        +void UnequipShield()
-        +void UnequipBow()
-        +void UnequipHelmet()
-        +int GetAttackValue()
-        +int GetDefenseValue()
+        +Dwarf(string name, int health, int baseAttack, int baseDefense)
     }
 
     class Elf {
-        +Sword Sword
-        +Bow Bow
-        +Armor Armor
-        +Helmet Helmet
-        +void EquipSword(Sword sword)
-        +void EquipBow(Bow bow)
-        +void EquipArmor(Armor armor)
-        +void EquipHelmet(Helmet helmet)
-        +void UnequipSword()
-        +void UnequipBow()
-        +void UnequipArmor()
-        +void UnequipHelmet()
-        +int GetAttackValue()
-        +int GetDefenseValue()
+        +Elf(string name, int health, int baseAttack, int baseDefense)
     }
 
     class Wizard {
-        +Staff Staff
-        +SpellsBook SpellsBook
-        +void SetItem(Item item)
-        +void GetItem(Item item)
-        +void DropItem(Item item)
-        +int GetAttackValue()
-        +int GetDefenseValue()
+        #bool CanUseMagicalItems
+        +Wizard(string name, int health, int baseAttack, int baseDefense)
+    }
+
+    class Item {
+        <<abstract>>
+        +string Name
+        +int AttackValue
+        +int DefenseValue
+        #Item(string name)
     }
 
     class AttackItem {
         <<abstract>>
-        + string Name
-        + int AttackValue
+        +int AttackValue
         #AttackItem(string name, int attackValue)
     }
 
     class DefenseItem {
         <<abstract>>
-        + string Name
-        + int DefenseValue
+        +int DefenseValue
         #DefenseItem(string name, int defenseValue)
     }
 
     class AttackDefenseItem {
         <<abstract>>
-        + string Name
-        + int AttackValue
-        + int DefenseValue
+        +int AttackValue
+        +int DefenseValue
         #AttackDefenseItem(string name, int attackValue, int defenseValue)
     }
 
-    class MagicalItem
+    class MagicalItem {
+        <<abstract>>
+        #MagicalItem(string name, int attackValue, int defenseValue)
+    }
+
     class Axe
-    class Shield
-    class Bow
-    class Helmet
     class Sword
+    class Bow
+    class Shield
     class Armor
+    class Helmet
     class Staff
     class Spell
 
     class SpellsBook {
-        +List~Spell~ Spells
+        -List~Spell~ spells
+        +IReadOnlyList~Spell~ Spells
+        +int AttackValue
+        +int DefenseValue
         +void AddSpell(Spell spell)
         +void RemoveSpell(Spell spell)
     }
@@ -102,33 +87,39 @@ classDiagram
     Character <|-- Dwarf
     Character <|-- Elf
     Character <|-- Wizard
+    Character o-- "*" Item : items
 
-    AttackItem --|> Item
-    DefenseItem --|> Item
-    AttackDefenseItem --|> Item
-    MagicalItem --|> AttackDefenseItem
+    Item <|-- AttackItem
+    Item <|-- DefenseItem
+    Item <|-- AttackDefenseItem
+    AttackDefenseItem <|-- MagicalItem
 
-    Axe --|> AttackItem
-    Shield --|> DefenseItem
-    Bow --|> AttackItem
-    Helmet --|> DefenseItem
-    Sword --|> AttackItem
-    Armor --|> DefenseItem
-    Staff --|> MagicalItem
-    SpellsBook --|> MagicalItem
-    Spell --|> MagicalItem
+    AttackItem <|-- Axe
+    AttackItem <|-- Sword
+    AttackItem <|-- Bow
+    DefenseItem <|-- Shield
+    DefenseItem <|-- Armor
+    DefenseItem <|-- Helmet
+    MagicalItem <|-- Staff
+    MagicalItem <|-- Spell
+    MagicalItem <|-- SpellsBook
 
-    Dwarf --> Axe
-    Dwarf --> Shield
-    Dwarf --> Bow
-    Dwarf --> Helmet
-
-    Elf --> Sword
-    Elf --> Bow
-    Elf --> Armor
-    Elf --> Helmet
-
-    Wizard --> Staff
-    Wizard --> SpellsBook
-    SpellsBook o-- Spell
+    SpellsBook o-- "*" Spell : spells
 ```
+
+## Decisiones de diseño
+
+- **Todo lo común está en `Character`**: vida, recibir ataques, curarse y tener
+  elementos (`AddItem` / `RemoveItem`). El ataque y la defensa totales se
+  calculan igual para todos los personajes: el valor base más lo que aporta
+  cada elemento.
+- **`Item` define `AttackValue` y `DefenseValue` como virtuales que devuelven 0.**
+  Cada subclase sobrescribe solo lo que aporta: un arma solo ataque, un
+  elemento de defensa solo defensa y `AttackDefenseItem` las dos cosas. Así
+  `Character` suma los valores de sus elementos sin preguntar de qué tipo es
+  cada uno (polimorfismo).
+- **Solo los magos usan elementos mágicos.** `Character` rechaza cualquier
+  `MagicalItem` salvo que `CanUseMagicalItems` sea verdadero, y solo `Wizard`
+  lo sobrescribe. Los magos también pueden usar elementos comunes.
+- **`SpellsBook` calcula su ataque y defensa sumando sus hechizos**, en vez de
+  guardar un valor que haya que mantener sincronizado.
