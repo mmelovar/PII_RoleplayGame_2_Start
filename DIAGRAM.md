@@ -1,3 +1,5 @@
+# Roleplay Game Diagram
+
 ```mermaid
 classDiagram 
 
@@ -15,7 +17,11 @@ classDiagram
         +int GetDefenseValue()
     }
 
-    class Item {}
+    class Item {
+        +string Name
+        +bool IsMagical
+        +void SetMagical(bool isMagical)
+    }
 
     class Dwarf {
         +Axe Axe
@@ -63,27 +69,23 @@ classDiagram
 
     class AttackItem {
         <<abstract>>
-        + string Name
         + int AttackValue
         #AttackItem(string name, int attackValue)
     }
 
     class DefenseItem {
         <<abstract>>
-        + string Name
         + int DefenseValue
         #DefenseItem(string name, int defenseValue)
     }
 
     class AttackDefenseItem {
         <<abstract>>
-        + string Name
         + int AttackValue
         + int DefenseValue
         #AttackDefenseItem(string name, int attackValue, int defenseValue)
     }
 
-    class MagicalItem
     class Axe
     class Shield
     class Bow
@@ -106,8 +108,7 @@ classDiagram
     AttackItem --|> Item
     DefenseItem --|> Item
     AttackDefenseItem --|> Item
-    MagicalItem --|> AttackDefenseItem
-
+    
     Axe --|> AttackItem
     Shield --|> DefenseItem
     Bow --|> AttackItem
@@ -116,7 +117,7 @@ classDiagram
     Armor --|> DefenseItem
     Staff --|> AttackDefenseItem
     SpellsBook --|> AttackDefenseItem
-    Spell --|> AttackItem
+    Spell --|> AttackDefenseItem
 
     Dwarf --> Axe
     Dwarf --> Shield
