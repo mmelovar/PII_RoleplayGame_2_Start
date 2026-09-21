@@ -1,5 +1,6 @@
 ```mermaid
-classDiagram
+classDiagram 
+
     class Character {
         +string Name
         +int Health
@@ -13,6 +14,8 @@ classDiagram
         +int GetAttackValue()
         +int GetDefenseValue()
     }
+
+    class Item {}
 
     class Dwarf {
         +Axe Axe
@@ -58,14 +61,29 @@ classDiagram
         +int GetDefenseValue()
     }
 
-    class Item {
+    class AttackItem {
         <<abstract>>
-        +string Name
-        +int AttackValue
-        +int DefenseValue
-        #Item(string name, int attackValue, int defenseValue)
+        + string Name
+        + int AttackValue
+        #AttackItem(string name, int attackValue)
     }
 
+    class DefenseItem {
+        <<abstract>>
+        + string Name
+        + int DefenseValue
+        #DefenseItem(string name, int defenseValue)
+    }
+
+    class AttackDefenseItem {
+        <<abstract>>
+        + string Name
+        + int AttackValue
+        + int DefenseValue
+        #AttackDefenseItem(string name, int attackValue, int defenseValue)
+    }
+
+    class MagicalItem
     class Axe
     class Shield
     class Bow
@@ -73,6 +91,7 @@ classDiagram
     class Sword
     class Armor
     class Staff
+    class Spell
 
     class SpellsBook {
         +List~Spell~ Spells
@@ -80,24 +99,24 @@ classDiagram
         +void RemoveSpell(Spell spell)
     }
 
-    class Spell {
-        +string Name
-        +int AttackValue
-        +int DefenseValue
-    }
-
     Character <|-- Dwarf
     Character <|-- Elf
     Character <|-- Wizard
 
-    Item <|-- Axe
-    Item <|-- Shield
-    Item <|-- Bow
-    Item <|-- Helmet
-    Item <|-- Sword
-    Item <|-- Armor
-    Item <|-- Staff
-    Item <|-- SpellsBook
+    AttackItem --|> Item
+    DefenseItem --|> Item
+    AttackDefenseItem --|> Item
+    MagicalItem --|> AttackDefenseItem
+
+    Axe --|> AttackItem
+    Shield --|> DefenseItem
+    Bow --|> AttackItem
+    Helmet --|> DefenseItem
+    Sword --|> AttackItem
+    Armor --|> DefenseItem
+    Staff --|> MagicalItem
+    SpellsBook --|> MagicalItem
+    Spell --|> MagicalItem
 
     Dwarf --> Axe
     Dwarf --> Shield
@@ -111,5 +130,5 @@ classDiagram
 
     Wizard --> Staff
     Wizard --> SpellsBook
-    SpellsBook "1" --> "*" Spell : contains
+    SpellsBook o-- Spell
 ```
