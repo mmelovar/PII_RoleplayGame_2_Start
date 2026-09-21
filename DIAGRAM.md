@@ -114,9 +114,9 @@ classDiagram
     Helmet --|> DefenseItem
     Sword --|> AttackItem
     Armor --|> DefenseItem
-    Staff --|> MagicalItem
-    SpellsBook --|> MagicalItem
-    Spell --|> MagicalItem
+    Staff --|> AttackDefenseItem
+    SpellsBook --|> AttackDefenseItem
+    Spell --|> AttackItem
 
     Dwarf --> Axe
     Dwarf --> Shield
