@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Library</name>
+    </assembly>
+    <members>
+        <member name="T:Library.Items.RolePlayGame.Item">
+            <summary>
+            Representa un elemento o equipamiento del juego.
+            </summary>
+        </member>
+        <member name="M:Library.Items.RolePlayGame.Item.#ctor(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.RolePlayGame.Item"/>.
+            </summary>
+            <param name="type">El tipo de elemento.</param>
+            <param name="name">El nombre del elemento.</param>
+            <param name="attackValue">El valor de ataque.</param>
+            <param name="defenseValue">El valor de defensa.</param>
+        </member>
+        <member name="P:Library.Items.RolePlayGame.Item.Type">
+            <summary>
+            Obtiene o establece el tipo del elemento.
+            </summary>
+        </member>
+        <member name="P:Library.Items.RolePlayGame.Item.Name">
+            <summary>
+            Obtiene o establece el nombre del elemento.
+            </summary>
+        </member>
+        <member name="P:Library.Items.RolePlayGame.Item.AttackValue">
+            <summary>
+            Obtiene o establece el valor de ataque del elemento.
+            </summary>
+        </member>
+        <member name="P:Library.Items.RolePlayGame.Item.DefenseValue">
+            <summary>
+            Obtiene o establece el valor de defensa del elemento.
+            </summary>
+        </member>
+    </members>
+</doc>
