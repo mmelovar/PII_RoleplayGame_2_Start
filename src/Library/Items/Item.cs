@@ -16,24 +16,22 @@ namespace Library.Items
         /// Inicializa una nueva instancia de la clase <see cref="Item"/>.
         /// </summary>
         /// <param name="name">El nombre del elemento.</param>
-        protected Item(string name)
+        /// <param name="magic">Indica si el elemento es mágico.</param>
+        protected Item(string name, bool magic)
         {
             Name = name;
+            IsMagical = magic;
         }
 
         /// <summary>
         /// Obtiene el nombre del elemento.
         /// </summary>
-        public string Name { get; }
+        public string Name { get; protected set; }
 
         /// <summary>
-        /// Obtiene el valor de ataque que aporta el elemento.
+        /// Define si el elemento es mágico o no.
         /// </summary>
-        public virtual int AttackValue => 0;
+        public bool IsMagical { get; protected set; }
 
-        /// <summary>
-        /// Obtiene el valor de defensa que aporta el elemento.
-        /// </summary>
-        public virtual int DefenseValue => 0;
     }
 }

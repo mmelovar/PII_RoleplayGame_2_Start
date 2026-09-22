@@ -4,12 +4,15 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-namespace Library.Items
+namespace Library.Items.AttackDefenseItem
 {
     /// <summary>
     /// Representa un hechizo. Es un elemento mágico que ataca y defiende.
     /// </summary>
-    public class Spell : MagicalItem
+    /// <remarks>
+    /// Un hechizo es un tipo de elemento que tiene un valor de ataque y un valor de defensa.
+    /// </remarks>
+    public class Spell : AttackDefenseItem
     {
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="Spell"/>.
@@ -18,7 +21,7 @@ namespace Library.Items
         /// <param name="attackValue">El valor de ataque.</param>
         /// <param name="defenseValue">El valor de defensa.</param>
         public Spell(string name, int attackValue, int defenseValue)
-            : base(name, attackValue, defenseValue)
+            : base(name, attackValue, defenseValue, true)
         {
         }
     }
