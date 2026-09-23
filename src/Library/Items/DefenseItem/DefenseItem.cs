@@ -4,27 +4,28 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-namespace Library.Items
+namespace Library.Items.DefenseItem
 {
     /// <summary>
     /// Representa un elemento de defensa: solo permite defender ataques.
     /// </summary>
     public abstract class DefenseItem : Item
     {
-        private readonly int defenseValue;
-
+        /// <summary>
+        /// El valor de defensa del elemento.
+        /// </summary>
+        public int DefenseValue { get; protected set; }
+        
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="DefenseItem"/>.
         /// </summary>
         /// <param name="name">El nombre del elemento.</param>
         /// <param name="defenseValue">El valor de defensa del elemento.</param>
-        protected DefenseItem(string name, int defenseValue)
-            : base(name)
+        /// <param name="magic">Indica si el elemento es mágico.</param>
+        protected DefenseItem(string name, int defenseValue, bool magic)
+            : base(name, magic)
         {
-            this.defenseValue = defenseValue;
+            this.DefenseValue = defenseValue;
         }
-
-        /// <inheritdoc/>
-        public override int DefenseValue => defenseValue;
     }
 }

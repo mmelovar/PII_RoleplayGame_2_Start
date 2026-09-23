@@ -4,7 +4,7 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-namespace Library.Items
+namespace Library.Items.AttackItem
 {
     /// <summary>
     /// Representa una espada. Es un arma.
@@ -17,7 +17,7 @@ namespace Library.Items
         /// <param name="name">El nombre del elemento.</param>
         /// <param name="attackValue">El valor de ataque.</param>
         public Sword(string name, int attackValue)
-            : base(name, attackValue)
+            : base(name, attackValue, false)
         {
         }
     }

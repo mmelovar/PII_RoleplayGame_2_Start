@@ -4,27 +4,28 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-namespace Library.Items
+namespace Library.Items.AttackItem
 {
     /// <summary>
     /// Representa un arma: un elemento que solo permite atacar.
     /// </summary>
     public abstract class AttackItem : Item
     {
-        private readonly int attackValue;
+        /// <summary>
+        /// El valor de ataque del arma.
+        /// </summary>
+        public int AttackValue { get; protected set; }
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="AttackItem"/>.
         /// </summary>
         /// <param name="name">El nombre del arma.</param>
         /// <param name="attackValue">El valor de ataque del arma.</param>
-        protected AttackItem(string name, int attackValue)
-            : base(name)
+        /// <param name="magic">Indica si el arma es mágica.</param>
+        protected AttackItem(string name, int attackValue, bool magic)
+            : base(name, magic)
         {
-            this.attackValue = attackValue;
+            this.AttackValue = attackValue;
         }
-
-        /// <inheritdoc/>
-        public override int AttackValue => attackValue;
     }
 }

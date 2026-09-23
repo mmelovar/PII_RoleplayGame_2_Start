@@ -4,7 +4,7 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-namespace Library.Items
+namespace Library.Items.DefenseItem
 {
     /// <summary>
     /// Representa un escudo. Es un elemento de defensa.
@@ -17,7 +17,7 @@ namespace Library.Items
         /// <param name="name">El nombre del elemento.</param>
         /// <param name="defenseValue">El valor de defensa.</param>
         public Shield(string name, int defenseValue)
-            : base(name, defenseValue)
+            : base(name, defenseValue, false)
         {
         }
     }
