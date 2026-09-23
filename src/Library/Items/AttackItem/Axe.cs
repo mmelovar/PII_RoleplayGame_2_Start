@@ -4,19 +4,21 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-using System;
-
 namespace Library.Items
 {
     /// <summary>
-    /// Representa un hacha (Axe) que puede ser utilizada por los enanos.
+    /// Representa un hacha. Es un arma.
     /// </summary>
-    public class Axe : Item
+    public class Axe : AttackItem
     {
-        public Axe(string name, int attackValue, int defenseValue)
-            : base(name, attackValue, defenseValue)
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="Axe"/>.
+        /// </summary>
+        /// <param name="name">El nombre del elemento.</param>
+        /// <param name="attackValue">El valor de ataque.</param>
+        public Axe(string name, int attackValue)
+            : base(name, attackValue)
         {
         }
     }
 }
-

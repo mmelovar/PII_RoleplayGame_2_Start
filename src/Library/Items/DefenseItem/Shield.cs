@@ -4,23 +4,20 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-using System;
-
 namespace Library.Items
 {
     /// <summary>
-    /// Representa un escudo (Shield) que puede ser utilizado por los guerreros.
+    /// Representa un escudo. Es un elemento de defensa.
     /// </summary>
-    public class Shield : Item
+    public class Shield : DefenseItem
     {
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="Shield"/>.
         /// </summary>
-        /// <param name="name">El nombre del escudo.</param>
-        /// <param name="attackValue">El valor de ataque del escudo.</param>
-        /// <param name="defenseValue">El valor de defensa del escudo.</param>
-        public Shield(string name, int attackValue, int defenseValue)
-            : base(name, attackValue, defenseValue)
+        /// <param name="name">El nombre del elemento.</param>
+        /// <param name="defenseValue">El valor de defensa.</param>
+        public Shield(string name, int defenseValue)
+            : base(name, defenseValue)
         {
         }
     }

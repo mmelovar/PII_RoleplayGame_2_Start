@@ -77,3 +77,10 @@ cambiar su comportamiento. Para demostrar esto, agreguen los casos de test de la
 [parte 1](https://github.com/ucudal/PII_RoleplayGame_1_Start#parte-4-testing) (o
 escribanlos si no llegaron a escribirlos) y comprueben que todo siga funcionando
 igual que antes (los tests dan verde).
+
+## Integrantes / Contributors
+
+- **Mauro Álvarez** - [@mauroalvare](https://github.com/mauroalvare)
+- **Sebastián Berardi** - [@SebaBerardi](https://github.com/SebaBerardi)
+- **Victoria Melo** - [@mmelovar](https://github.com/mmelovar)
+
