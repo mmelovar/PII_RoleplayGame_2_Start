@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Library.Items.AttackDefenseItem
 {
@@ -16,6 +17,7 @@ namespace Library.Items.AttackDefenseItem
     public class SpellsBook : AttackDefenseItem
     {
         private readonly List<Spell> spells = new List<Spell>();
+        private readonly ReadOnlyCollection<Spell> readOnlySpells;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="SpellsBook"/>.
@@ -24,17 +26,19 @@ namespace Library.Items.AttackDefenseItem
         public SpellsBook(string name)
             : base(name, 0, 0, true)
         {
+            readOnlySpells = spells.AsReadOnly();
         }
-
-        public List<Spell> Spells => spells;
-
 
         /// <summary>
         /// Obtiene los hechizos del libro. Es de solo lectura: para modificarla
         /// se usan <see cref="AddSpell"/> y <see cref="RemoveSpell"/>.
         /// </summary>
+        public ReadOnlyCollection<Spell> Spells => readOnlySpells;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Agrega un hechizo al libro.
+        /// </summary>
+        /// <param name="spell">El hechizo a agregar.</param>
         public void AddSpell(Spell spell)
         {
             ArgumentNullException.ThrowIfNull(spell);
@@ -44,7 +48,10 @@ namespace Library.Items.AttackDefenseItem
             DefenseValue += spell.DefenseValue;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Elimina un hechizo del libro.
+        /// </summary>
+        /// <param name="spell">El hechizo a eliminar.</param>
         public void RemoveSpell(Spell spell)
         {
             ArgumentNullException.ThrowIfNull(spell);

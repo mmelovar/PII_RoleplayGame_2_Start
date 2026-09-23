@@ -12,20 +12,14 @@ namespace Library.Items.AttackItem
     public abstract class AttackItem : Item
     {
         /// <summary>
-        /// El valor de ataque del arma.
-        /// </summary>
-        public int AttackValue { get; protected set; }
-
-        /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="AttackItem"/>.
         /// </summary>
         /// <param name="name">El nombre del arma.</param>
         /// <param name="attackValue">El valor de ataque del arma.</param>
         /// <param name="magic">Indica si el arma es mágica.</param>
         protected AttackItem(string name, int attackValue, bool magic)
-            : base(name, magic)
+            : base(name, attackValue, 0, magic)
         {
-            this.AttackValue = attackValue;
         }
     }
 }

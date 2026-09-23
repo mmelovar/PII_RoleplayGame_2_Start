@@ -5,11 +5,13 @@
 //--------------------------------------------------------------------------------
 
 using System;
-using Library.Characters;
-using Library.Items;
 using NUnit.Framework;
+using Library.Characters;
+using Library.Items.AttackItem;
+using Library.Items.DefenseItem;
+using Library.Items.AttackDefenseItem;
 
-namespace Ucu.Poo.RolePlayGame.Tests
+namespace LibraryTests.Characters
 {
     /// <summary>
     /// Pruebas unitarias para la clase Wizard y sus elementos asociados (Staff, Spell, SpellsBook).
@@ -51,7 +53,7 @@ namespace Ucu.Poo.RolePlayGame.Tests
         [Test]
         public void GetAttackValue_WithStaff_ReturnsBasePlusStaffAttack()
         {
-            this.gandalf.AddItem(this.staff);
+            this.gandalf.SetItem(this.staff);
 
             int expectedAttack = 20 + 40; // Base + Staff
             Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(expectedAttack));
@@ -79,8 +81,8 @@ namespace Ucu.Poo.RolePlayGame.Tests
             this.spellsBook.AddSpell(this.fireball);
             this.spellsBook.AddSpell(this.shieldSpell);
 
-            this.gandalf.AddItem(this.staff);
-            this.gandalf.AddItem(this.spellsBook);
+            this.gandalf.SetItem(this.staff);
+            this.gandalf.SetItem(this.spellsBook);
 
             int expectedAttack = 20 + 40 + 60; // Base (20) + Staff (40) + SpellsBook (60)
             Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(expectedAttack));
@@ -94,8 +96,8 @@ namespace Ucu.Poo.RolePlayGame.Tests
         {
             this.spellsBook.AddSpell(this.shieldSpell);
 
-            this.gandalf.AddItem(this.staff);
-            this.gandalf.AddItem(this.spellsBook);
+            this.gandalf.SetItem(this.staff);
+            this.gandalf.SetItem(this.spellsBook);
 
             int expectedDefense = 10 + 15 + 30; // Base (10) + Staff (15) + SpellsBook (30)
             Assert.That(this.gandalf.GetDefenseValue(), Is.EqualTo(expectedDefense));
@@ -116,37 +118,28 @@ namespace Ucu.Poo.RolePlayGame.Tests
         }
 
         /// <summary>
-        /// Verifica que al quitar un item con RemoveItem, el mago deje de tenerlo y su ataque disminuya.
+        /// Verifica que al desequipar un item con DropItem, el mago deje de tenerlo y su ataque disminuya.
         /// </summary>
         [Test]
-        public void RemoveItem_EquippedStaff_RemovesStaffAndReducesAttack()
+        public void DropItem_EquippedStaff_RemovesStaffAndReducesAttack()
         {
-            this.gandalf.AddItem(this.staff);
-            Assert.That(this.gandalf.Items, Does.Contain(this.staff));
+            this.gandalf.SetItem(this.staff);
+            Assert.That(this.gandalf.Staff, Is.EqualTo(this.staff));
 
-            this.gandalf.RemoveItem(this.staff);
-            Assert.That(this.gandalf.Items, Does.Not.Contain(this.staff));
+            this.gandalf.DropItem(this.staff);
+            Assert.That(this.gandalf.Staff, Is.Null);
             Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(20));
         }
 
         /// <summary>
-        /// Verifica que el mago, además de elementos mágicos, pueda usar elementos comunes.
+        /// Verifica que intentar equipar un item no permitido para el mago lance una excepción.
         /// </summary>
         [Test]
-        public void AddItem_NonMagicalItem_AddsItsAttack()
+        public void SetItem_InvalidItem_ThrowsArgumentException()
         {
-            this.gandalf.AddItem(new Sword("Espada", 15));
+            Sword genericItem = new Sword("Espada", 15);
 
-            Assert.That(this.gandalf.GetAttackValue(), Is.EqualTo(20 + 15));
-        }
-
-        /// <summary>
-        /// Verifica que agregar un item nulo lance una excepción.
-        /// </summary>
-        [Test]
-        public void AddItem_NullItem_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() => this.gandalf.AddItem(null));
+            Assert.Throws<ArgumentException>(() => this.gandalf.SetItem(genericItem));
         }
     }
 }

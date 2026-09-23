@@ -4,38 +4,532 @@
         <name>Library</name>
     </assembly>
     <members>
-        <member name="T:Library.Items.RolePlayGame.Item">
+        <member name="T:Library.Characters.Character">
             <summary>
-            Representa un elemento o equipamiento del juego.
+            Representa un personaje base del juego.
             </summary>
         </member>
-        <member name="M:Library.Items.RolePlayGame.Item.#ctor(System.String,System.String,System.Int32,System.Int32)">
+        <member name="P:Library.Characters.Character.Name">
             <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.RolePlayGame.Item"/>.
+            Obtiene o establece el nombre del personaje.
             </summary>
-            <param name="type">El tipo de elemento.</param>
+        </member>
+        <member name="P:Library.Characters.Character.Health">
+            <summary>
+            Obtiene o establece la salud actual del personaje.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Character.MaxHealth">
+            <summary>
+            Obtiene o establece la salud máxima del personaje.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Character.BaseAttack">
+            <summary>
+            Obtiene o establece el valor de ataque base del personaje.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Character.BaseDefense">
+            <summary>
+            Obtiene o establece el valor de defensa base del personaje.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Character.#ctor(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Characters.Character"/>.
+            </summary>
+            <param name="name"></param>
+            <param name="health"></param>
+            <param name="baseAttack"></param>
+            <param name="baseDefense"></param>
+        </member>
+        <member name="M:Library.Characters.Character.ReceiveAttack(System.Int32)">
+            <summary>
+            Recibe un ataque de otro personaje.
+            </summary>
+            <param name="power"></param>
+        </member>
+        <member name="M:Library.Characters.Character.Cure(System.Int32)">
+            <summary>
+            Cura al personaje, aumentando su salud en la cantidad especificada.
+            </summary>
+            <param name="points"></param>
+        </member>
+        <member name="M:Library.Characters.Character.Attack(Library.Characters.Character)">
+            <summary>
+            Obtiene el valor total de ataque del personaje, incluyendo su ataque base y los valores de ataque de los elementos equipados.
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Library.Characters.Character.GetAttackValue">
+            <summary>
+            Obtiene el valor total de ataque del personaje, incluyendo su ataque base y los valores de ataque de los elementos equipados.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Library.Characters.Character.GetDefenseValue">
+            <summary>
+            Obtiene el valor total de defensa del personaje, incluyendo su defensa base y los valores de defensa de los elementos equipados.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Library.Characters.Dwarf">
+            <summary>
+            Representa un personaje de tipo Enano (Dwarf).
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Dwarf.#ctor(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Characters.Dwarf"/>.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Dwarf.Axe">
+            <summary>
+            Obtiene o establece el hacha del enano.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Dwarf.Shield">
+            <summary>
+            Obtiene o establece el escudo del enano.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Dwarf.Bow">
+            <summary>
+            Obtiene o establece el arco del enano.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Dwarf.Helmet">
+            <summary>
+            Obtiene o establece el casco del enano.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Dwarf.GetAttackValue">
+            <summary>
+            Obtiene el valor total de ataque del enano, incluyendo su ataque base y los valores de ataque de los elementos equipados.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Library.Characters.Dwarf.GetDefenseValue">
+            <summary>
+            Obtiene el valor total de defensa del enano, incluyendo su defensa base y los valores de defensa de los elementos equipados.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Library.Characters.Dwarf.EquipAxe(Library.Items.AttackItem.Axe)">
+            <summary>
+            Equipa un hacha al enano.
+            </summary>
+            <param name="axe"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Dwarf.EquipShield(Library.Items.DefenseItem.Shield)">
+            <summary>
+            Equipa un escudo al enano.
+            </summary>
+            <param name="shield"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Dwarf.EquipBow(Library.Items.AttackItem.Bow)">
+            <summary>
+            Equipa un arco al enano.
+            </summary>
+            <param name="bow"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Dwarf.EquipHelmet(Library.Items.DefenseItem.Helmet)">
+            <summary>
+            Equipa un casco al enano.
+            </summary>
+            <param name="helmet"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Dwarf.UnequipAxe">
+            <summary>
+            Libera el hacha del enano.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Dwarf.UnequipShield">
+            <summary>
+            Libera el escudo del enano.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Dwarf.UnequipBow">
+            <summary>
+            Libera el arco del enano.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Dwarf.UnequipHelmet">
+            <summary>
+            Libera el casco del enano.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Dwarf.GetItem(Library.Items.Item)">
+            <summary>
+            El enano equipa un elemento, ya sea un hacha, un escudo, un arco o un casco.
+            </summary>
+            <param name="item"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Library.Characters.Dwarf.DropItem(Library.Items.Item)">
+            <summary>
+            El enano libera un elemento, ya sea un hacha, un escudo, un arco o un casco.
+            </summary>
+            <param name="item"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:Library.Characters.Elf">
+            <summary>
+            Representa un personaje de tipo Elfo (Elf).
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Elf.Sword">
+            <summary>
+            Obtiene o establece la espada del elfo.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Elf.Bow">
+            <summary>
+            Obtiene o establece el arco del elfo.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Elf.Armor">
+            <summary>
+            Obtiene o establece la armadura del elfo.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Elf.Helmet">
+            <summary>
+            Obtiene o establece el casco del elfo.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Elf.#ctor(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Characters.Elf"/>.
+            </summary>
+            <param name="name"></param>
+            <param name="health"></param>
+            <param name="baseAttack"></param>
+            <param name="baseDefense"></param>
+        </member>
+        <member name="M:Library.Characters.Elf.GetAttackValue">
+            <summary>
+            Obtiene el valor total de ataque del elfo, incluyendo su ataque base y los valores de ataque de los elementos equipados.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Elf.GetDefenseValue">
+            <summary>
+            Obtiene el valor total de defensa del elfo, incluyendo su defensa base y los valores de defensa de los elementos equipados.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Elf.EquipSword(Library.Items.AttackItem.Sword)">
+            <summary>
+            Establece una espada para el elfo.
+            </summary>
+            <param name="sword"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Elf.EquipBow(Library.Items.AttackItem.Bow)">
+            <summary>
+            Establece un arco para el elfo.
+            </summary>
+            <param name="bow"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Elf.EquipArmor(Library.Items.DefenseItem.Armor)">
+            <summary>
+            Establece una armadura para el elfo.
+            </summary>
+            <param name="armor"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Elf.EquipHelmet(Library.Items.DefenseItem.Helmet)">
+            <summary>
+            Establece un casco para el elfo.
+            </summary>
+            <param name="helmet"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Elf.UnequipSword">
+            <summary>
+            Libera la espada del elfo.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Elf.UnequipBow">
+            <summary>
+            Libera el arco del elfo.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Elf.UnequipArmor">
+            <summary>
+            Libera la armadura del elfo.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Elf.UnequipHelmet">
+            <summary>
+            Libera el casco del elfo.
+            </summary>
+        </member>
+        <member name="T:Library.Characters.Wizard">
+            <summary>
+            Representa un personaje de tipo Mago (Wizard).
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Wizard.#ctor(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Characters.Wizard"/>.
+            </summary>
+            <param name="name"></param>
+            <param name="health"></param>
+            <param name="baseAttack"></param>
+            <param name="baseDefense"></param>
+        </member>
+        <member name="P:Library.Characters.Wizard.Staff">
+            <summary>
+            Obtiene o establece el bastón del mago.
+            </summary>
+        </member>
+        <member name="P:Library.Characters.Wizard.SpellsBook">
+            <summary>
+            Obtiene o establece el libro de hechizos del mago.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Wizard.GetAttackValue">
+            <summary>
+            Obtiene el valor total de ataque del mago, incluyendo su ataque base y los valores de ataque de los elementos equipados.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Wizard.GetDefenseValue">
+            <summary>
+            Obtiene el valor total de defensa del mago, incluyendo su defensa base y los valores de defensa de los elementos equipados.
+            </summary>
+        </member>
+        <member name="M:Library.Characters.Wizard.SetItem(Library.Items.Item)">
+            <summary>
+            Establece un elemento para el mago, ya sea un bastón o un libro de hechizos.
+            </summary>
+            <param name="item"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Library.Characters.Wizard.GetItem(Library.Items.Item)">
+            <summary>
+            Obtiene un elemento para el mago.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:Library.Characters.Wizard.DropItem(Library.Items.Item)">
+            <summary>
+            Libera un elemento del mago.
+            </summary>
+            <param name="item"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Library.Items.AttackDefenseItem.AttackDefenseItem">
+            <summary>
+            Representa un elemento que permite atacar y también defender.
+            </summary>
+            <remarks>
+            Un elemento de ataque y defensa es un tipo de elemento que tiene un valor de ataque y un valor de defensa.
+            </remarks>
+        </member>
+        <member name="M:Library.Items.AttackDefenseItem.AttackDefenseItem.#ctor(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackDefenseItem.AttackDefenseItem"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="attackValue">El valor de ataque del elemento.</param>
+            <param name="defenseValue">El valor de defensa del elemento.</param>
+            <param name="magic">Indica si el elemento es mágico.</param>
+        </member>
+        <member name="T:Library.Items.AttackDefenseItem.Spell">
+            <summary>
+            Representa un hechizo. Es un elemento mágico que ataca y defiende.
+            </summary>
+            <remarks>
+            Un hechizo es un tipo de elemento que tiene un valor de ataque y un valor de defensa.
+            </remarks>
+        </member>
+        <member name="M:Library.Items.AttackDefenseItem.Spell.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackDefenseItem.Spell"/>.
+            </summary>
             <param name="name">El nombre del elemento.</param>
             <param name="attackValue">El valor de ataque.</param>
             <param name="defenseValue">El valor de defensa.</param>
         </member>
-        <member name="P:Library.Items.RolePlayGame.Item.Type">
+        <member name="T:Library.Items.AttackDefenseItem.SpellsBook">
             <summary>
-            Obtiene o establece el tipo del elemento.
+            Representa un libro de hechizos. Su ataque y su defensa son la suma de
+            los hechizos que contiene.
             </summary>
         </member>
-        <member name="P:Library.Items.RolePlayGame.Item.Name">
+        <member name="M:Library.Items.AttackDefenseItem.SpellsBook.#ctor(System.String)">
             <summary>
-            Obtiene o establece el nombre del elemento.
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackDefenseItem.SpellsBook"/>.
+            </summary>
+            <param name="name">El nombre del libro.</param>
+        </member>
+        <member name="P:Library.Items.AttackDefenseItem.SpellsBook.Spells">
+            <summary>
+            Obtiene los hechizos del libro. Es de solo lectura: para modificarla
+            se usan <see cref="M:Library.Items.AttackDefenseItem.SpellsBook.AddSpell(Library.Items.AttackDefenseItem.Spell)"/> y <see cref="M:Library.Items.AttackDefenseItem.SpellsBook.RemoveSpell(Library.Items.AttackDefenseItem.Spell)"/>.
             </summary>
         </member>
-        <member name="P:Library.Items.RolePlayGame.Item.AttackValue">
+        <member name="M:Library.Items.AttackDefenseItem.SpellsBook.AddSpell(Library.Items.AttackDefenseItem.Spell)">
             <summary>
-            Obtiene o establece el valor de ataque del elemento.
+            Agrega un hechizo al libro.
+            </summary>
+            <param name="spell">El hechizo a agregar.</param>
+        </member>
+        <member name="M:Library.Items.AttackDefenseItem.SpellsBook.RemoveSpell(Library.Items.AttackDefenseItem.Spell)">
+            <summary>
+            Elimina un hechizo del libro.
+            </summary>
+            <param name="spell">El hechizo a eliminar.</param>
+        </member>
+        <member name="T:Library.Items.AttackDefenseItem.Staff">
+            <summary>
+            Representa un báculo. Es un elemento mágico que ataca y defiende.
             </summary>
         </member>
-        <member name="P:Library.Items.RolePlayGame.Item.DefenseValue">
+        <member name="M:Library.Items.AttackDefenseItem.Staff.#ctor(System.String,System.Int32,System.Int32)">
             <summary>
-            Obtiene o establece el valor de defensa del elemento.
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackDefenseItem.Staff"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="attackValue">El valor de ataque.</param>
+            <param name="defenseValue">El valor de defensa.</param>
+        </member>
+        <member name="T:Library.Items.AttackItem.AttackItem">
+            <summary>
+            Representa un arma: un elemento que solo permite atacar.
+            </summary>
+        </member>
+        <member name="M:Library.Items.AttackItem.AttackItem.#ctor(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackItem.AttackItem"/>.
+            </summary>
+            <param name="name">El nombre del arma.</param>
+            <param name="attackValue">El valor de ataque del arma.</param>
+            <param name="magic">Indica si el arma es mágica.</param>
+        </member>
+        <member name="T:Library.Items.AttackItem.Axe">
+            <summary>
+            Representa un hacha. Es un arma.
+            </summary>
+        </member>
+        <member name="M:Library.Items.AttackItem.Axe.#ctor(System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackItem.Axe"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="attackValue">El valor de ataque.</param>
+        </member>
+        <member name="T:Library.Items.AttackItem.Bow">
+            <summary>
+            Representa un arco. Es un arma.
+            </summary>
+        </member>
+        <member name="M:Library.Items.AttackItem.Bow.#ctor(System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackItem.Bow"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="attackValue">El valor de ataque.</param>
+        </member>
+        <member name="T:Library.Items.AttackItem.Sword">
+            <summary>
+            Representa una espada. Es un arma.
+            </summary>
+        </member>
+        <member name="M:Library.Items.AttackItem.Sword.#ctor(System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.AttackItem.Sword"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="attackValue">El valor de ataque.</param>
+        </member>
+        <member name="T:Library.Items.DefenseItem.Armor">
+            <summary>
+            Representa una armadura. Es un elemento de defensa.
+            </summary>
+        </member>
+        <member name="M:Library.Items.DefenseItem.Armor.#ctor(System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.DefenseItem.Armor"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="defenseValue">El valor de defensa.</param>
+        </member>
+        <member name="T:Library.Items.DefenseItem.DefenseItem">
+            <summary>
+            Representa un elemento de defensa: solo permite defender ataques.
+            </summary>
+        </member>
+        <member name="M:Library.Items.DefenseItem.DefenseItem.#ctor(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.DefenseItem.DefenseItem"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="defenseValue">El valor de defensa del elemento.</param>
+            <param name="magic">Indica si el elemento es mágico.</param>
+        </member>
+        <member name="T:Library.Items.DefenseItem.Helmet">
+            <summary>
+            Representa un casco. Es un elemento de defensa.
+            </summary>
+        </member>
+        <member name="M:Library.Items.DefenseItem.Helmet.#ctor(System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.DefenseItem.Helmet"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="defenseValue">El valor de defensa.</param>
+        </member>
+        <member name="T:Library.Items.DefenseItem.Shield">
+            <summary>
+            Representa un escudo. Es un elemento de defensa.
+            </summary>
+        </member>
+        <member name="M:Library.Items.DefenseItem.Shield.#ctor(System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.DefenseItem.Shield"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="defenseValue">El valor de defensa.</param>
+        </member>
+        <member name="T:Library.Items.Item">
+            <summary>
+            Representa un elemento del juego. Por defecto no aporta ataque ni defensa;
+            cada subclase sobrescribe los valores que sí aporta.
+            </summary>
+        </member>
+        <member name="M:Library.Items.Item.#ctor(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Library.Items.Item"/>.
+            </summary>
+            <param name="name">El nombre del elemento.</param>
+            <param name="attackValue">El valor de ataque del elemento.</param>
+            <param name="defenseValue">El valor de defensa del elemento.</param>
+            <param name="magic">Indica si el elemento es mágico.</param>
+        </member>
+        <member name="P:Library.Items.Item.Name">
+            <summary>
+            Obtiene el nombre del elemento.
+            </summary>
+        </member>
+        <member name="P:Library.Items.Item.IsMagical">
+            <summary>
+            Define si el elemento es mágico o no.
+            </summary>
+        </member>
+        <member name="P:Library.Items.Item.AttackValue">
+            <summary>
+            Obtiene el valor de ataque del elemento.
+            </summary>
+        </member>
+        <member name="P:Library.Items.Item.DefenseValue">
+            <summary>
+            Obtiene el valor de defensa del elemento.
             </summary>
         </member>
     </members>

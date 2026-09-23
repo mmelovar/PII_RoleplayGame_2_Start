@@ -10,12 +10,7 @@ namespace Library.Items.DefenseItem
     /// Representa un elemento de defensa: solo permite defender ataques.
     /// </summary>
     public abstract class DefenseItem : Item
-    {
-        /// <summary>
-        /// El valor de defensa del elemento.
-        /// </summary>
-        public int DefenseValue { get; protected set; }
-        
+    {       
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="DefenseItem"/>.
         /// </summary>
@@ -23,9 +18,8 @@ namespace Library.Items.DefenseItem
         /// <param name="defenseValue">El valor de defensa del elemento.</param>
         /// <param name="magic">Indica si el elemento es mágico.</param>
         protected DefenseItem(string name, int defenseValue, bool magic)
-            : base(name, magic)
+            : base(name, 0, defenseValue, magic)
         {
-            this.DefenseValue = defenseValue;
         }
     }
 }

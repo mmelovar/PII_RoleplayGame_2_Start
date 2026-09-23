@@ -1,7 +1,9 @@
 using System;
 using NUnit.Framework;
 using Library.Characters;
-using Library.Items;
+using Library.Items.AttackItem;
+using Library.Items.DefenseItem;
+using Library.Items.AttackDefenseItem;
 
 namespace LibraryTests.Characters
 {
@@ -24,10 +26,10 @@ namespace LibraryTests.Characters
         {
             var elf = new Elf("Legolas", 90, 12, 6);
 
-            elf.AddItem(new Sword("Elven Sword", 7));
-            elf.AddItem(new Bow("Longbow", 5));
-            elf.AddItem(new Armor("Leather Armor", 8));
-            elf.AddItem(new Helmet("Forest Helmet", 4));
+            elf.EquipSword(new Sword("Elven Sword", 7));
+            elf.EquipBow(new Bow("Longbow", 5));
+            elf.EquipArmor(new Armor("Leather Armor", 8));
+            elf.EquipHelmet(new Helmet("Forest Helmet", 4));
 
             Assert.That(elf.GetAttackValue(), Is.EqualTo(24));
             Assert.That(elf.GetDefenseValue(), Is.EqualTo(18));
@@ -37,12 +39,11 @@ namespace LibraryTests.Characters
         public void ElfUnequipsSwordAndAttackDrops()
         {
             var elf = new Elf("Legolas", 90, 12, 6);
-            var sword = new Sword("Elven Sword", 7);
 
-            elf.AddItem(sword);
+            elf.EquipSword(new Sword("Elven Sword", 7));
             Assert.That(elf.GetAttackValue(), Is.EqualTo(19));
 
-            elf.RemoveItem(sword);
+            elf.UnequipSword();
             Assert.That(elf.GetAttackValue(), Is.EqualTo(12));
         }
 
@@ -73,18 +74,10 @@ namespace LibraryTests.Characters
             var attacker = new Elf("Legolas", 90, 20, 2);
             var defender = new Dwarf("Alonso", 100, 10, 5);
 
-            attacker.AddItem(new Sword("Elven Sword", 10));
+            attacker.EquipSword(new Sword("Elven Sword", 10));
             attacker.Attack(defender);
 
             Assert.That(defender.Health, Is.EqualTo(75));
-        }
-
-        [Test]
-        public void AddItem_SpellsBook_ThrowsArgumentException()
-        {
-            var elf = new Elf("Legolas", 90, 12, 6);
-
-            Assert.Throws<ArgumentException>(() => elf.AddItem(new SpellsBook("Libro")));
         }
     }
 }
